@@ -2756,7 +2756,7 @@ class UnitOfWork implements PropertyChangedListener
                         }
                     }
 
-                    if ( ! $associatedId) {
+                    if ( ! $associatedId || count($associatedId) !== count($assoc['targetToSourceKeyColumns']) ) {
                         // Foreign key is NULL
                         $class->reflFields[$field]->setValue($entity, null);
                         $this->originalEntityData[$oid][$field] = null;
