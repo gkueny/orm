@@ -1603,7 +1603,7 @@ class ClassMetadataInfo implements ClassMetadata
                 if ( ! $this->table) {
                     throw new RuntimeException("ClassMetadataInfo::setTable() has to be called before defining a one to one relationship.");
                 }
-                $this->table['uniqueConstraints'][$mapping['fieldName']."_uniq"] = array(
+                $this->table['uniqueConstraints'][$this->table['name'] . '_' . $mapping['fieldName']."_uniq"] = array(
                     'columns' => $uniqueConstraintColumns
                 );
             }
