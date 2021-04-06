@@ -683,9 +683,11 @@ class BasicEntityPersister implements EntityPersister
 
                 $this->quotedColumns[$sourceColumn]  = $quotedColumn;
                 $this->columnTypes[$sourceColumn]    = PersisterHelper::getTypeOfColumn($targetColumn, $targetClass, $this->em);
-                $result[$owningTable][$sourceColumn] = $newValId
-                    ? $newValId[$targetClass->getFieldForColumn($targetColumn)]
-                    : null;
+                if(!empty($newValId)) {
+                    $result[$owningTable][$sourceColumn] = $newValId[$targetClass->getFieldForColumn($targetColumn)];
+                } else if(empty($result[$owningTable][$sourceColumn])) {
+                    $result[$owningTable][$sourceColumn] = null;
+                }
             }
         }
 
